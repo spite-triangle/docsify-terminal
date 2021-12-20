@@ -14,7 +14,7 @@
 
 # 使用
 
-需要在`index.html`文件中的`head`与`body`下分别添加以下内容
+从仓库中下载文件`css/term.css`与`script/term.js`， 然后在`index.html`中的`head`与`body`内分别添加以下内容
 
 ```html
 <head>
