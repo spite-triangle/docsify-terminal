@@ -36,3 +36,22 @@
 ```javascript
     var parts = lines[i].split('$ ');
 ```
+
+# 详细配置
+
+`markdown`语法规则：
+
+<center>
+
+![markdown](/image/markdown.jpg)
+
+</center>
+
+`index.html`配置
+
+
+<center>
+
+![index](/image/index.jpg)
+
+</center>
