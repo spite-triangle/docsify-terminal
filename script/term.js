@@ -2,13 +2,12 @@
     var generateSpan = function (className, content) {
         return `<span class="${className}">${content}</span>`;
     };
-    
+
     // 复制按钮 
     var btn = ' <i class="fa fa-clipboard term_btn" data-command="text"></i> ';
 
-    // 在原来的插件数组后，添加当前插件
+    // 按钮提示
     window.$docsify.plugins = [].concat(window.$docsify.plugins, function (hook, vm) {
-
         // 处理路径
         var dealPath = function (content) {
             // 划分用户名与路径
@@ -21,39 +20,55 @@
             // 划分用户名与路径
             var parts = content.split('//');
             if (parts.length > 1) {
-                return generateSpan('term_command', parts[0].trim()) + btn.replace('text',parts[0].trim()) + generateSpan('term_annotation', '//' + parts[1]);
+                return generateSpan('term_command', parts[0].trim()) + btn.replace('text', parts[0].trim()) + generateSpan('term_annotation', '//' + parts[1]);
             } else {
-                return generateSpan('term_command', parts[0].trim()) + btn.replace('text',parts[0].trim());
+                return generateSpan('term_command', parts[0].trim()) + btn.replace('text', parts[0].trim());
             }
         };
-
-        // 修改code标签
-        const termRegex = /<pre[^>]*><code[^>]*class=['"]lang-term['"][^>]*>([^>]*)<\/code>[^>]*<\/pre>/g;
-        var matchFcn = function (match, text) {
-            // 拆分行
-            var lines = text.split('\n');
-            var convertedText = "";
-            var i = 0;
-            for ( i ; i < lines.length; i++) {
-                var parts = lines[i].split('$ ');
-                // 结果还是指令
-                if (parts.length > 1) {
-                    // 指令
-                    convertedText = convertedText + dealPath(parts[0].trim()) + "$ " + dealCommand(parts[1].trim()) + '</br>';
-                } else {
-                    // 结果
-                    convertedText = convertedText + lines[i].trim() + '</br>';
+        var getElementByAttr = function (tag, dataAttr, reg) {
+            var aElements = document.getElementsByTagName(tag);
+            var aEle = [];
+            for (var i = 0; i < aElements.length; i++) {
+                var ele = aElements[i].getAttribute(dataAttr);
+                if (reg.test(ele)) {
+                    aEle.push(aElements[i]);
                 }
             }
-
-            return '<pre v-pre data-lang="term" class="window_term"><div class="cycles"> <div class="cycle term_cycle1"> </div> <div class="cycle term_cycle2"> </div> <div class="cycle term_cycle3"> </div>  </div> <code class="lang_term">' + convertedText + '</code></pre>'
+            return aEle;
         };
 
-        // 每次html生成后调用
-        hook.afterEach(function (html, next) {
-            // 返回处理结果
-            next(html.replace(termRegex, matchFcn));
+        hook.ready(function () {
+            // 查找所有的term
+            var pres = getElementByAttr('pre', 'data-lang', /term/);
+
+            // 遍历所有的term
+            pres.forEach(function (pre, index) {
+                console.log(pre.childNodes[0].innerHTML);
+
+                // 修改 pre 标签
+                pre.setAttribute('class', 'window_term');
+
+                // 修改 code 标签
+                // 拆分行
+                var lines = pre.childNodes[0].innerHTML.split('\n');
+                var convertedText = "";
+                var i = 0;
+                for (i; i < lines.length; i++) {
+                    var parts = lines[i].split('$ ');
+                    // 结果还是指令
+                    if (parts.length > 1) {
+                        // 指令
+                        convertedText = convertedText + dealPath(parts[0].trim()) + "$ " + dealCommand(parts[1].trim()) + '</br>';
+                    } else {
+                        // 结果
+                        convertedText = convertedText + lines[i].trim() + '</br>';
+                    }
+                }
+
+                pre.innerHTML = '<div class="cycles"> <div class="cycle term_cycle1"> </div> <div class="cycle term_cycle2"> </div> <div class="cycle term_cycle3"> </div>  </div> <code class="lang_term">' + convertedText + '</code>';
+            });
         });
+
     });
 
     // 按钮提示
