@@ -37,7 +37,7 @@
             return aEle;
         };
 
-        hook.ready(function () {
+        hook.doneEach(function () {
             // 查找所有的term
             var pres = getElementByAttr('pre', 'data-lang', /term/);
 
@@ -73,7 +73,7 @@
 
     // 按钮提示
     window.$docsify.plugins = [].concat(window.$docsify.plugins, function (hook, vm) {
-        hook.ready(function () {
+        hook.doneEach(function () {
             // 获取所有的指令按钮
             var term_btns = document.querySelectorAll('.term_btn');
             // 遍历所有按钮
