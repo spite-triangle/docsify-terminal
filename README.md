@@ -1,6 +1,6 @@
 # 作用
 
-一个`doscify`的插件，用于控制台指令显示。
+`doscify`的插件，控制台样式显示。
 
 # 效果
 
@@ -14,18 +14,18 @@
 
 # 使用
 
-从仓库中下载文件`css/term.css`与`script/term.js`， 然后在`index.html`中的`head`与`body`内分别添加以下内容
+在`index.html`中的`head`与`body`内分别添加以下内容
 
 ```html
 <head>
-    <link rel="stylesheet" href="./css/term.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/spite-triangle/docsify-terminal@1.0.0/css/term.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 ```
 
 ```html
 <body>
-    <script src="./script/term.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/spite-triangle/docsify-terminal@1.0.0/script/term.min.js"></script>
 </body>
 ```
 
@@ -39,19 +39,19 @@
 
 # 详细配置
 
-`markdown`语法规则：
+- `markdown`语法规则：
 
-<center>
+    <center>
 
-![markdown](/image/markdown.jpg)
+    ![markdown](/image/markdown.jpg)
 
-</center>
+    </center>
 
-`index.html`配置
+- `index.html`配置
 
 
-<center>
+    <center>
 
-![index](/image/index.jpg)
+    ![index](/image/index.jpg)
 
-</center>
+    </center>
