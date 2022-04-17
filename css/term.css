@@ -11,7 +11,7 @@
 }
 
 .term_annotation {
-    color: rgb(47, 137, 42);
+    color: rgb(67 168 61);
 }
 
 
@@ -89,3 +89,4 @@
 :root {
     --code-block-padding: 0em 1em 0em 1em;
 }
+
