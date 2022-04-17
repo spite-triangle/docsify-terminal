@@ -43,7 +43,6 @@
 
             // 遍历所有的term
             pres.forEach(function (pre, index) {
-                console.log(pre.childNodes[0].innerHTML);
 
                 // 修改 pre 标签
                 pre.setAttribute('class', 'window_term');
