@@ -17,12 +17,12 @@
 在`index.html`中的`head`与`body`内分别添加以下内容
 
 ```html
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/spite-triangle/docsify-terminal@1.0.0/css/term.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/spite-triangle/docsify-terminal/css/term.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 ```
 
 ```html
-    <script src="https://cdn.jsdelivr.net/gh/spite-triangle/docsify-terminal@1.0.0/script/term.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/spite-triangle/docsify-terminal/script/term.min.js"></script>
 ```
 
 # 说明
