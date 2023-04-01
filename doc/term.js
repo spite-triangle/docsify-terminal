@@ -60,6 +60,7 @@
                     if (parts.length > 1) {
                         // 指令
                         var path = parts[0];
+                        console.log(lines[i]);
                         var command = lines[i].substring(path.length + 2, lines[i].length);
                         convertedText = convertedText + dealPath(path.trim()) + "$ " + dealCommand(command.trim()) + '</br>';
                     } else {
