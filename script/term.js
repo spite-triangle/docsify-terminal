@@ -19,12 +19,13 @@
         var dealCommand = function (content) {
             // 划分用户名与路径
             var parts = content.split('//');
+ 
             if (parts.length > 1) {
                 var command = parts[0];
                 var annotation = content.substring(command.length + 2, content.length);
-                return generateSpan('term_command', command.trim()) + btn.replace('text', command.trim()) + generateSpan('term_annotation', '//' + annotation);
+                return generateSpan('term_command', command) + btn.replace('text', command) + generateSpan('term_annotation', '//' + annotation);
             } else {
-                return generateSpan('term_command', parts[0].trim()) + btn.replace('text', parts[0].trim());
+                return generateSpan('term_command', parts[0]) + btn.replace('text', parts[0]);
             }
         };
         var getElementByAttr = function (tag, dataAttr, reg) {
@@ -42,17 +43,17 @@
         hook.doneEach(function () {
             // 查找所有的term
             var pres = getElementByAttr('pre', 'data-lang', /term/);
-
             // 遍历所有的term
             pres.forEach(function (pre, index) {
 
                 // 修改 pre 标签
                 pre.setAttribute('class', 'window_term');
-
+                
                 // 修改 code 标签
                 // 拆分行
                 var lines = pre.childNodes[0].innerHTML.split('\n');
                 var convertedText = "";
+                var outputText = "";
                 var i = 0;
                 for (i; i < lines.length; i++) {
                     var parts = lines[i].split('$ ');
@@ -60,13 +61,20 @@
                     if (parts.length > 1) {
                         // 指令
                         var path = parts[0];
+                        
                         var command = lines[i].substring(path.length + 2, lines[i].length);
-                        convertedText = convertedText + dealPath(path.trim()) + "$ " + dealCommand(command.trim()) + '</br>';
+                        convertedText = convertedText + dealPath(path) + "$ " + dealCommand(command) + '</br>';
                     } else {
                         // 结果
-                        convertedText = convertedText + lines[i].trim() + '</br>';
+                        outputText = outputText + lines[i] + '\n';
                     }
                 }
+
+                // 删除最后一个换行
+                if(outputText.length > 0){
+                   outputText =  outputText.substring(0, outputText.length - 1);
+                }
+                convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
 
                 pre.innerHTML = '<div class="cycles"> <div class="cycle term_cycle1"> </div> <div class="cycle term_cycle2"> </div> <div class="cycle term_cycle3"> </div>  </div> <code class="lang_term">' + convertedText + '</code>';
             });
