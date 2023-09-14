@@ -1,12 +1,17 @@
 
 ```term
 triangle@LEARN:~$ test//       aaa // /// test
-    目录: E:\workspace\docsify
 
+111111
 
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----          2023/9/6     22:32                docsify-terminal 
+triangle@LEARN:~$ test//       aaa // /// test
+
+222222
+
+triangle@LEARN:~$ test//       aaa // /// test
+triangle@LEARN:~$ test//       aaa // /// test
+aa
+bbdd   a
 ```
 
 ```cpp

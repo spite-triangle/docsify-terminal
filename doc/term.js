@@ -54,28 +54,38 @@
                 var lines = pre.childNodes[0].innerHTML.split('\n');
                 var convertedText = "";
                 var outputText = "";
+                var hasOutputText = false;
                 var i = 0;
                 for (i; i < lines.length; i++) {
                     var parts = lines[i].split('$ ');
+                    
                     // 结果还是指令
                     if (parts.length > 1) {
+                        // 检测到输出，将上一次的保存
+                        if(hasOutputText == true){
+                            if(outputText.length > 0){
+                               convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
+                               outputText = "";
+                            }
+                            hasOutputText = false;
+                        }
+
                         // 指令
                         var path = parts[0];
-                        
                         var command = lines[i].substring(path.length + 2, lines[i].length);
                         convertedText = convertedText + dealPath(path) + "$ " + dealCommand(command) + '</br>';
                     } else {
+                        hasOutputText = true;
                         // 结果
                         outputText = outputText + lines[i] + '\n';
                     }
                 }
-
-                // 删除最后一个换行
+                
+                // 将最后一次输出保存
                 if(outputText.length > 0){
-                   outputText =  outputText.substring(0, outputText.length - 1);
+                    convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
                 }
-                convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
-
+                
                 pre.innerHTML = '<div class="cycles"> <div class="cycle term_cycle1"> </div> <div class="cycle term_cycle2"> </div> <div class="cycle term_cycle3"> </div>  </div> <code class="lang_term">' + convertedText + '</code>';
             });
         });
