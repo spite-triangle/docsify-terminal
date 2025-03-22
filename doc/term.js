@@ -1,6 +1,34 @@
 ! function () {
+
+    var HtmlUtil = {
+        /*1.用正则表达式实现html转码*/
+        htmlEncodeByRegExp:function (str){  
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&/g,"&amp;");
+             s = s.replace(/</g,"&lt;");
+             s = s.replace(/>/g,"&gt;");
+             s = s.replace(/ /g,"&nbsp;");
+             s = s.replace(/\'/g,"&#39;");
+             s = s.replace(/\"/g,"&quot;");
+             return s;  
+       },
+       /*2.用正则表达式实现html解码*/
+       htmlDecodeByRegExp:function (str){  
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&amp;/g,"&");
+             s = s.replace(/&lt;/g,"<");
+             s = s.replace(/&gt;/g,">");
+             s = s.replace(/&nbsp;/g," ");
+             s = s.replace(/&#39;/g,"\'");
+             s = s.replace(/&quot;/g,"\"");
+             return s;  
+       }
+    };
+
     var generateSpan = function (className, content) {
-        return `<span class="${className}">${content}</span>`;
+        return `<span class="${className}">${HtmlUtil.htmlEncodeByRegExp(content)}</span>`;
     };
 
     // 复制按钮 
@@ -50,35 +78,44 @@
                 pre.setAttribute('class', 'window_term');
                 
                 // 修改 code 标签
-                // 拆分行
-                var lines = pre.childNodes[0].innerHTML.split('\n');
+                // 1. 将 innerHTML 中的 tag 删除
+                // 2. 将转义字符还原
+                // 3. 拆分文本
+                var lines = HtmlUtil.htmlDecodeByRegExp(pre.childNodes[0].innerHTML.replace(/<[^>]*>/g, "")).split('\n');
                 var convertedText = "";
                 var outputText = "";
                 var hasOutputText = false;
                 var i = 0;
+                var pathRegx = /.*@.*:.*/;
                 for (i; i < lines.length; i++) {
                     var parts = lines[i].split('$ ');
+
                     
                     // 结果还是指令
                     if (parts.length > 1) {
-                        // 检测到输出，将上一次的保存
-                        if(hasOutputText == true){
-                            if(outputText.length > 0){
-                               convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
-                               outputText = "";
-                            }
-                            hasOutputText = false;
-                        }
-
                         // 指令
                         var path = parts[0];
                         var command = lines[i].substring(path.length + 2, lines[i].length);
-                        convertedText = convertedText + dealPath(path) + "$ " + dealCommand(command) + '</br>';
-                    } else {
-                        hasOutputText = true;
-                        // 结果
-                        outputText = outputText + lines[i] + '\n';
+                        
+                        // 检测 path 格式 xxx@xxx:xxx
+                        if(pathRegx.test(path)){
+                                // 检测到输出，将上一次的保存
+                                if(hasOutputText == true){
+                                    if(outputText.length > 0){
+                                    convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
+                                    outputText = "";
+                                    }
+                                    hasOutputText = false;
+                                }
+        
+                                convertedText = convertedText + dealPath(path) + "$ " + dealCommand(command) + '</br>';
+                                continue;
+                        }
                     }
+
+                    hasOutputText = true;
+                    // 结果，特殊字符转义
+                    outputText = outputText +  HtmlUtil.htmlEncodeByRegExp(lines[i]) + '\n';
                 }
                 
                 // 将最后一次输出保存
