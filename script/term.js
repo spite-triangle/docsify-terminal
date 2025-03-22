@@ -35,7 +35,7 @@
     var btn = ' <i class="fa fa-clipboard term_btn" data-command="text"></i> ';
 
     // 按钮提示
-    window.$docsify.plugins = [].concat(window.$docsify.plugins, function (hook, vm) {
+    window.$docsify.plugins = [].concat( function (hook, vm) {
         // 处理路径
         var dealPath = function (content) {
             // 划分用户名与路径
@@ -115,7 +115,7 @@
 
                     hasOutputText = true;
                     // 结果，特殊字符转义
-                    outputText = outputText +  HtmlUtil.htmlEncodeByRegExp(lines[i]) + '\n';
+                    outputText = outputText +  HtmlUtil.htmlEncodeByRegExp(lines[i]) + '</br>';
                 }
                 
                 // 将最后一次输出保存
@@ -127,7 +127,7 @@
             });
         });
 
-    });
+    }, window.$docsify.plugins);
 
     // 按钮提示
     window.$docsify.plugins = [].concat(window.$docsify.plugins, function (hook, vm) {

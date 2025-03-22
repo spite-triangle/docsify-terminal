@@ -1,5 +1,12 @@
 
 ```term
+triangle@LEARN:~$ psql -d postgres // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Password for user triangle:
+psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1))
+Type "help" for help.
+a
+postgres=#                                         aa                                                                       aaaa                              
+
 triangle@LEARN:~$ test <a> $ //      aaa // /// test
 
 $ $  $

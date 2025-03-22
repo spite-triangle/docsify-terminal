@@ -22,38 +22,59 @@
     overflow: auto !important;
     background-color: rgb(83, 15, 60) !important;
     padding-bottom: 10px !important;
+    margin-left: 10px;
 }
 
 /*滚动条高宽度*/
-.lang_term::-webkit-scrollbar{
-    width: 5px !important; 
+.lang_term::-webkit-scrollbar {
+    width: 5px !important;
     height: 10px !important;
 }
 
 /*滚动条滑块*/
-.lang_term::-webkit-scrollbar-thumb{
-    border-radius: 3px !important ;
+.lang_term::-webkit-scrollbar-thumb {
+    border-radius: 3px !important;
 }
 
-.lang_term::-webkit-scrollbar-thumb:hover{
-    background: #c7c4c4be !important ;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2) !important ;
+.lang_term::-webkit-scrollbar-thumb:hover {
+    background: #adadadbe !important;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2) !important;
 }
 
-.window_term{
+.window_term {
     white-space: nowrap !important;
     background-color: rgb(83, 15, 60) !important;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-.output{
+.output {
+    overflow-x: auto;
+    /* 仅水平方向显示滚动条 */
+    width: inherit;
+    display: inherit;
     background-color: rgb(83, 15, 60) !important;
-    color:rgb(221, 219, 219) !important;
+    color: rgb(221, 219, 219) !important;
     margin: 0px !important;
     padding: 0px !important;
 }
 
-.cycles{
+/*滚动条高宽度*/
+.output::-webkit-scrollbar {
+    width: 5px !important;
+    height: 6px !important;
+}
+
+/*滚动条滑块*/
+.output::-webkit-scrollbar-thumb {
+    border-radius: 3px !important;
+}
+
+.output::-webkit-scrollbar-thumb:hover {
+    background: #adadadbe !important;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.cycles {
     padding-top: 10px !important;
 }
 
@@ -65,6 +86,7 @@
     display: inline-block;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 2%;
 }
 
 .term_cycle1 {
@@ -84,16 +106,15 @@
 }
 
 .term_btn {
-  transition: all 0.2s ease-in-out;
-  color:#a7a7a78d;
+    transition: all 0.2s ease-in-out;
+    color: #a7a7a78d;
 }
 
 .term_btn:hover {
-  transform: scale(1.2);
-  color:#e4e4e4;
+    transform: scale(1.2);
+    color: #e4e4e4;
 }
 
 :root {
     --code-block-padding: 0em 1em 0em 1em;
 }
-
