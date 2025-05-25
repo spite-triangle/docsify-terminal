@@ -127,7 +127,7 @@
                     convertedText = convertedText + '<code class = "output">' + outputText + "</code>";
                 }
                 
-                pre.innerHTML = '<div class="cycles"> <div class="cycle term_cycle1"> </div> <div class="cycle term_cycle2"> </div> <div class="cycle term_cycle3"> </div>  </div> <code class="lang_term">' + convertedText + '</code>';
+                pre.innerHTML = '<div class="term_title"> <div class="cycle term_cycle1"> </div> <div class="cycle term_cycle2"> </div> <div class="cycle term_cycle3"> </div>  </div> <code class="lang_term">' + convertedText + '</code>';
             });
         });
 
