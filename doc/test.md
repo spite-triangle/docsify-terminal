@@ -7,7 +7,7 @@ Type "help" for help.
 a
 postgres=#                                         aa                                                                       aaaa                              
 
-triangle@LEARN:~$ test <a> $ //      aaa // /// test
+triangle@LEARN:~$ test <a>aa<\a> $ \/\/'aa' //      aaa // /// test
 
 $ $  $
 

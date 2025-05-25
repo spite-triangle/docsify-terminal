@@ -42,18 +42,22 @@
             var parts = content.split(':');
             return generateSpan('term_user', parts[0]) + ':' + generateSpan('term_path', parts[1]);
         };
-
+        
         // 处理指令
         var dealCommand = function (content) {
             // 划分用户名与路径
             var parts = content.split('//');
- 
+            
+            // command 中识别 \/ 转义符号
+            var command = parts[0];
+            command = command.replace(/\\\//g, '/');
+
             if (parts.length > 1) {
-                var command = parts[0];
                 var annotation = content.substring(command.length + 2, content.length);
-                return generateSpan('term_command', command) + btn.replace('text', command) + generateSpan('term_annotation', '//' + annotation);
+                return generateSpan('term_command', command) + btn.replace('text',  command) + generateSpan('term_annotation', '//' + annotation);
             } else {
-                return generateSpan('term_command', parts[0]) + btn.replace('text', parts[0]);
+
+                return generateSpan('term_command', command) + btn.replace('text', command);
             }
         };
         var getElementByAttr = function (tag, dataAttr, reg) {

@@ -27,7 +27,14 @@
 
 # 说明
 
-指令与路径的分隔是靠`"$ "`进行区分，`$`之后还有一个空格。
+```txt
+\`\`\`term
+user@path$ command // annotation
+\`\`\`
+command output
+```
+
+`user@path`与`command`的分隔是靠`"$ "`进行区分，`$`之后还有一个空格，且在 `command` 中支持 `\/` 转义
 
 ```javascript
     var parts = lines[i].split('$ ');
